@@ -1,23 +1,37 @@
 #include <iostream>
+
 #include "../db/db.h"
 
 using namespace std;
 
 int main() {
-    DB db;
+    DB *db1 = new DB();
 
-    db.put("a", "2");
-    db.put("b", "10");
-    db.put("c", "20");
+    db1->put("a", "2");
+    db1->put("b", "5");
+    db1->put("c", "10");
 
-    cout << db.get("a") << endl;
-    cout << db.get("b") << endl;
-    cout << db.get("c") << endl;
+    cout << "Before remove" << endl;
+    cout << "a -> " << db1->get("a") << endl;
+    cout << "b -> " << db1->get("b") << endl;
+    cout << "c -> " << db1->get("c") << endl << endl;
 
-    db.remove("a");
+    db1->remove("a");
+    db1->remove("c");
 
-    cout << db.get("a") << endl;
-    cout << db.get("b") << endl;
-    cout << db.get("c") << endl;
+    cout << "After remove" << endl;
+    cout << "a -> " << db1->get("a")     << endl;
+    cout << "b -> " << db1->get("b") << endl;
+    cout << "c -> " << db1->get("c") << endl << endl;
+
+    delete db1;
+
+    cout << "After DB restarted" << endl;
+    
+    DB *db2 = new DB();
+    cout << "a -> " << db2->get("a") << endl;
+    cout << "b -> " << db2->get("b") << endl;
+    cout << "c -> " << db2->get("c") << endl;
+
     return 0;
 }

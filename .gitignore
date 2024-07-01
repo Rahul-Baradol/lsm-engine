@@ -1,4 +1,7 @@
 *.o
 *.out
 
+out/
+build/
+
 .vscode
