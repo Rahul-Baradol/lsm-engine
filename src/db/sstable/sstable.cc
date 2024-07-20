@@ -58,8 +58,10 @@ void SSTable::flush(Memtable *memtable) {
         return;
     }
 
+    sstId++;
+
     fseek(SSTInfoFile, 0, SEEK_SET);
-    fwrite(to_string(sstId + 1).c_str(), 1, to_string(sstId).size(), SSTInfoFile);
+    fwrite(to_string(sstId).c_str(), 1, to_string(sstId).size(), SSTInfoFile);
     fflush(SSTInfoFile);
 
     memtable -> dump(sst);
