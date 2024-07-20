@@ -16,4 +16,5 @@ public:
     void append(string data);
     void loadMemTable(Memtable* memtable);   
     void clear();
+    void flush();
 };

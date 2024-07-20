@@ -1,5 +1,8 @@
+#pragma once
+
 #include <map>
 #include <string>
+#include <iostream>
 
 using namespace std;
 
@@ -16,4 +19,10 @@ public:
     string get(const string key);
     
     void remove(const string key);
+
+    void clear();
+
+    void dump(FILE *file);
+
+    bool is_full();
 };

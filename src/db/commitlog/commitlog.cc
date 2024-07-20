@@ -1,4 +1,5 @@
 #include <iostream>
+#include <unistd.h>
 
 #include "commitlog.h"
 
@@ -29,7 +30,18 @@ void CommitLog::append(string data) {
 }
 
 void CommitLog::clear() {
-    freopen(filename.c_str(), "w", file);
+    fseek(file, 0, SEEK_SET);
+    int fd = fileno(file);
+    if (fd == -1) {
+        perror("Error getting file descriptor");
+        return;
+    }
+
+    // Truncate the file to zero length
+    if (ftruncate(fd, 0) == -1) {
+        perror("Error truncating file");
+        return;
+    }
 }
 
 void CommitLog::loadMemTable(Memtable* memtable) {
@@ -55,4 +67,8 @@ void CommitLog::loadMemTable(Memtable* memtable) {
         memtable->put(key, value);
     }
     free(line);
+}
+
+void CommitLog::flush() {
+    fflush(file);
 }

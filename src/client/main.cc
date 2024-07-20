@@ -5,33 +5,47 @@
 using namespace std;
 
 int main() {
-    DB *db1 = new DB();
+    DB *db = new DB();
 
-    db1->put("a", "2");
-    db1->put("b", "5");
-    db1->put("c", "10");
+    while (1) {
+        cout << "put, get, delete?: ";
+        string command;
+        cin >> command;
 
-    cout << "Before remove" << endl;
-    cout << "a -> " << db1->get("a") << endl;
-    cout << "b -> " << db1->get("b") << endl;
-    cout << "c -> " << db1->get("c") << endl << endl;
+        if (command == "put") {
+            string key, value;
+            cout << "key: ";
+            cin >> key;
 
-    db1->remove("a");
-    db1->remove("c");
+            cout << "value: ";
+            cin >> value;   
 
-    cout << "After remove" << endl;
-    cout << "a -> " << db1->get("a")     << endl;
-    cout << "b -> " << db1->get("b") << endl;
-    cout << "c -> " << db1->get("c") << endl << endl;
+            db -> put(key, value);
+            cout << endl;
+            continue;
+        }
 
-    delete db1;
+        if (command == "get") {
+            string key;
+            cout << "key: ";
+            cin >> key;
 
-    cout << "After DB restarted" << endl;
-    
-    DB *db2 = new DB();
-    cout << "a -> " << db2->get("a") << endl;
-    cout << "b -> " << db2->get("b") << endl;
-    cout << "c -> " << db2->get("c") << endl;
+            cout << db -> get(key) << endl;
+            continue;
+        }
+
+        if (command == "delete") {
+            string key;
+            cout << "key: ";
+            cin >> key;
+
+            db -> remove(key);
+            cout << endl;
+            continue;
+        }
+
+        cout << "pls...don't mess me up!" << endl;
+    }
 
     return 0;
 }

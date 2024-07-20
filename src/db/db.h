@@ -1,11 +1,13 @@
 #include <string>
 
 #include "commitlog/commitlog.h"
+#include "sstable/sstable.h"
 
 class DB {
 private:
     Memtable *memtable;
     CommitLog *commitlog;
+    SSTable *sstable;
 
 public:
     DB();
