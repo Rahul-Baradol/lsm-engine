@@ -3,12 +3,13 @@
 #include <map>
 #include <string>
 #include <iostream>
+#include "skiplist.h"
 
 using namespace std;
 
 class Memtable {
 private:
-    map<string, string> memtable;
+    Skiplist *memtable;
 
 public:
     Memtable();
